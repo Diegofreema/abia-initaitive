@@ -113,11 +113,12 @@ export function HeroSection() {
           <div ref={imageRef} className="relative">
             <div className="relative z-10">
               <Image
-                src="/placeholder.svg?height=600&width=500"
+                src="https://abiastate.gov.ng/wp-content/uploads/2025/07/WhatsApp-Image-2025-07-21-at-08.48.41-1.jpeg"
                 alt="Young leaders in training"
                 width={500}
                 height={600}
-                className="rounded-2xl shadow-2xl"
+                className="w-full h-auto object-cover rounded-2xl shadow-2xl"
+                priority
               />
             </div>
             {/* Decorative elements */}
