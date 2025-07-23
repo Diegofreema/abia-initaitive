@@ -89,7 +89,7 @@ export function AboutSection() {
                 <div className="border-l-4 border-green-600 pl-4">
                   <h4 className="font-semibold text-gray-900 mb-2">Duration</h4>
                   <p className="text-gray-600">
-                    6-month intensive program with ongoing support
+                    7-days intensive program with ongoing support
                   </p>
                 </div>
 
@@ -97,7 +97,7 @@ export function AboutSection() {
                   <h4 className="font-semibold text-gray-900 mb-2">
                     Age Range
                   </h4>
-                  <p className="text-gray-600">18-35 years old</p>
+                  <p className="text-gray-600">16-20 years old</p>
                 </div>
 
                 <div className="border-l-4 border-green-600 pl-4">
