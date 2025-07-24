@@ -44,7 +44,7 @@ const schema = defineSchema({
     bloodType: v.string(),
     bloodGroup: v.string(),
     hasMedicalCondition: v.boolean(),
-    medicalConditionDetails: v.optional(v.string()),
+    medicalConditionDetails: v.optional(v.array(v.string())),
 
     // Sponsor Information
     sponsorTitle: v.string(),
@@ -52,7 +52,7 @@ const schema = defineSchema({
     sponsorLastName: v.string(),
     sponsorMiddleName: v.optional(v.string()),
     sponsorGender: v.string(),
-    sponsorDesignation: v.string(),
+
     sponsorMobileNumber: v.string(),
     sponsorAlternateMobileNumber: v.optional(v.string()),
     sponsorResidentialAddress: v.string(),
@@ -63,7 +63,7 @@ const schema = defineSchema({
       v.literal('approved'),
       v.literal('rejected')
     ),
-    submittedAt: v.number(),
+
     reviewedAt: v.optional(v.number()),
     reviewedBy: v.optional(v.id('users')),
     reviewNotes: v.optional(v.string()),
@@ -73,8 +73,7 @@ const schema = defineSchema({
     .searchIndex('name', {
       searchField: 'firstName',
       filterFields: ['lastName', 'middleName'],
-    })
-    .index('submittedAt', ['submittedAt']),
+    }),
 });
 
 export default schema;

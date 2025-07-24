@@ -7,7 +7,7 @@ import { v } from 'convex/values';
 export const create = mutation({
   args: {
     personalInfo: v.object({
-      profilePicture: v.optional(v.string()),
+      profilePictureId: v.id('_storage'),
       title: v.string(),
       firstName: v.string(),
       lastName: v.string(),
@@ -33,7 +33,7 @@ export const create = mutation({
       bloodType: v.string(),
       bloodGroup: v.string(),
       hasMedicalCondition: v.boolean(),
-      medicalConditionDetails: v.optional(v.string()),
+      medicalConditionDetails: v.optional(v.array(v.string())),
     }),
     sponsorInfo: v.object({
       title: v.string(),
@@ -41,7 +41,6 @@ export const create = mutation({
       lastName: v.string(),
       middleName: v.optional(v.string()),
       gender: v.string(),
-      designation: v.string(),
       mobileNumber: v.string(),
       alternateMobileNumber: v.optional(v.string()),
       residentialAddress: v.string(),
@@ -63,10 +62,18 @@ export const create = mutation({
       throw new Error('User already has a registration');
     }
 
+    // Check if user has a profile picture
+    const profilePicture = await ctx.storage.getUrl(
+      args.personalInfo.profilePictureId
+    );
+    if (!profilePicture) {
+      throw new Error('Profile picture not found');
+    }
+
     const registrationId = await ctx.db.insert('registrations', {
       userId,
       // Personal Information
-      profilePicture: args.personalInfo.profilePicture,
+      profilePicture: profilePicture,
       title: args.personalInfo.title,
       firstName: args.personalInfo.firstName,
       lastName: args.personalInfo.lastName,
@@ -100,14 +107,17 @@ export const create = mutation({
       sponsorLastName: args.sponsorInfo.lastName,
       sponsorMiddleName: args.sponsorInfo.middleName,
       sponsorGender: args.sponsorInfo.gender,
-      sponsorDesignation: args.sponsorInfo.designation,
+
       sponsorMobileNumber: args.sponsorInfo.mobileNumber,
       sponsorAlternateMobileNumber: args.sponsorInfo.alternateMobileNumber,
       sponsorResidentialAddress: args.sponsorInfo.residentialAddress,
 
       // Status
       status: 'pending',
-      submittedAt: Date.now(),
+    });
+
+    await ctx.db.patch(userId, {
+      isRegistered: true,
     });
 
     return registrationId;
@@ -214,5 +224,11 @@ export const updateStatus = mutation({
       reviewedBy: userId,
       reviewNotes: args.reviewNotes,
     });
+  },
+});
+
+export const generateUploadUrl = mutation({
+  handler: async (ctx) => {
+    return await ctx.storage.generateUploadUrl();
   },
 });

@@ -1,7 +1,12 @@
 import { z } from 'zod';
 
+const currentDate = new Date(); // Current date: July 24, 2025
+const minDate = new Date(currentDate);
+minDate.setFullYear(currentDate.getFullYear() - 20); // 2005
+const maxDate = new Date(currentDate);
+maxDate.setFullYear(currentDate.getFullYear() - 16);
 export const personalInfoSchema = z.object({
-  profilePicture: z.string().optional(),
+  profilePicture: z.string().min(1, 'Profile picture is required'),
   title: z.string().min(1, 'Title is required'),
   firstName: z.string().min(1, 'First name is required'),
   lastName: z.string().min(1, 'Last name is required'),
@@ -9,7 +14,7 @@ export const personalInfoSchema = z.object({
   gender: z.string().min(1, 'Gender is required'),
   dateOfBirth: z.string().min(1, 'Date of birth is required'),
   maritalStatus: z.string().min(1, 'Marital status is required'),
-  emailAddress: z.string().email('Invalid email address'),
+  emailAddress: z.email().min(1, 'Email address is required'),
   stateOfOrigin: z.string().min(1, 'State of origin is required'),
   lgaOfOrigin: z.string().min(1, 'LGA of origin is required'),
   town: z.string().min(1, 'Town is required'),

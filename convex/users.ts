@@ -14,3 +14,14 @@ export const getCurrentUser = query({
     return user;
   },
 });
+
+export const current = query({
+  args: {},
+  handler: async (ctx) => {
+    const userId = await getAuthUserId(ctx);
+    if (!userId) {
+      return null;
+    }
+    return await ctx.db.get(userId);
+  },
+});
