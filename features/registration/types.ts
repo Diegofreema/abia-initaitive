@@ -8,7 +8,7 @@ export type PersonalInfo = {
   dateOfBirth: string;
   maritalStatus: string;
   emailAddress: string;
-  stateOfOrigin: string;
+
   lgaOfOrigin: string;
   town: string;
   lgaOfResidence: string;
@@ -71,7 +71,6 @@ export interface RegistrationFormData {
   gender: string;
   dateOfBirth: string;
   maritalStatus: string;
-  stateOfOrigin: string;
   lgaOfOrigin: string;
   town: string;
   lgaOfResidence: string;
@@ -109,45 +108,7 @@ export const MEDICAL_CONDITIONS = [
   'Other',
 ];
 
-export const NIGERIAN_STATES = [
-  'Abia',
-  'Adamawa',
-  'Akwa Ibom',
-  'Anambra',
-  'Bauchi',
-  'Bayelsa',
-  'Benue',
-  'Borno',
-  'Cross River',
-  'Delta',
-  'Ebonyi',
-  'Edo',
-  'Ekiti',
-  'Enugu',
-  'FCT',
-  'Gombe',
-  'Imo',
-  'Jigawa',
-  'Kaduna',
-  'Kano',
-  'Katsina',
-  'Kebbi',
-  'Kogi',
-  'Kwara',
-  'Lagos',
-  'Nasarawa',
-  'Niger',
-  'Ogun',
-  'Ondo',
-  'Osun',
-  'Oyo',
-  'Plateau',
-  'Rivers',
-  'Sokoto',
-  'Taraba',
-  'Yobe',
-  'Zamfara',
-];
+export const NIGERIAN_STATES = ['Abia'];
 
 export const courses = [
   'Fullstack Web Development (Javascript)',
@@ -170,7 +131,6 @@ export const requiredFields: (keyof RegistrationFormData)[] = [
   'gender',
   'dateOfBirth',
   'maritalStatus',
-  'stateOfOrigin',
   'lgaOfOrigin',
   'town',
   'lgaOfResidence',
@@ -218,5 +178,4 @@ export const local = [
   'Umuahia North',
   'Umuahia South',
   'Umu-Nneochi',
-  'Others',
 ];

@@ -26,7 +26,6 @@ const STEPS = [
   { id: 1, title: 'ID Details', component: IdStep },
   { id: 2, title: 'Bio Data', component: BioStep },
   { id: 3, title: 'Medical', component: MedicalStep },
-
   { id: 4, title: 'Sponsor', component: NextOfKinStep },
 ];
 type Props = {
@@ -45,7 +44,6 @@ export function RegistrationComponent({ user }: Props) {
       lgaOfOrigin: 'Aba North',
       lgaOfResidence: 'Aba North',
       maritalStatus: 'Single',
-      stateOfOrigin: 'Abia',
       bloodType: '',
       bloodGroup: '',
       profilePicture: undefined,
@@ -98,7 +96,6 @@ export function RegistrationComponent({ user }: Props) {
           'gender',
           'dateOfBirth',
           'maritalStatus',
-          'stateOfOrigin',
           'lgaOfOrigin',
           'town',
           'lgaOfResidence',
@@ -133,7 +130,6 @@ export function RegistrationComponent({ user }: Props) {
     gender,
     dateOfBirth,
     maritalStatus,
-    stateOfOrigin,
     lgaOfOrigin,
     town,
     lgaOfResidence,
@@ -160,7 +156,6 @@ export function RegistrationComponent({ user }: Props) {
     gender,
     dateOfBirth,
     maritalStatus,
-    stateOfOrigin,
     lgaOfOrigin,
     town,
     lgaOfResidence,
@@ -213,7 +208,7 @@ export function RegistrationComponent({ user }: Props) {
           maritalStatus: data.maritalStatus,
           middleName: data.middleName,
           phoneNumber: data.phoneNumber,
-          stateOfOrigin: data.stateOfOrigin,
+
           title: data.title,
           town: data.town,
           lgaOfOrigin: data.lgaOfOrigin,

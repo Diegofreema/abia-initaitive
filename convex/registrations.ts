@@ -3,6 +3,8 @@ import { getAuthUserId } from '@convex-dev/auth/server';
 // import { filter } from 'convex-helpers/server/filter';
 import { paginationOptsValidator } from 'convex/server';
 import { v } from 'convex/values';
+// import { internal } from './_generated/api';
+import { totalRegistrations } from './counter';
 
 export const create = mutation({
   args: {
@@ -16,7 +18,6 @@ export const create = mutation({
       dateOfBirth: v.string(),
       maritalStatus: v.string(),
       emailAddress: v.string(),
-      stateOfOrigin: v.string(),
       lgaOfOrigin: v.string(),
       town: v.string(),
       lgaOfResidence: v.string(),
@@ -82,7 +83,6 @@ export const create = mutation({
       dateOfBirth: args.personalInfo.dateOfBirth,
       maritalStatus: args.personalInfo.maritalStatus,
       emailAddress: args.personalInfo.emailAddress,
-      stateOfOrigin: args.personalInfo.stateOfOrigin,
       lgaOfOrigin: args.personalInfo.lgaOfOrigin,
       town: args.personalInfo.town,
       lgaOfResidence: args.personalInfo.lgaOfResidence,
@@ -119,6 +119,11 @@ export const create = mutation({
     await ctx.db.patch(userId, {
       isRegistered: true,
     });
+    await totalRegistrations.inc(ctx);
+    // await ctx.scheduler.runAfter(0, internal.sendEmails.sendWelcomeEmail, {
+    //   email: args.personalInfo.emailAddress,
+    //   name: `${args.personalInfo.firstName} ${args.personalInfo.lastName}`,
+    // });
 
     return registrationId;
   },

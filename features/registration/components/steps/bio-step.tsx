@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 
-import { local, NIGERIAN_STATES, StepProps } from '../../types';
+import { local, StepProps } from '../../types';
 import { Notice } from '../notice';
 import { ProfilePictureUpload } from '../profile-pics';
 
@@ -57,7 +57,6 @@ export function BioStep({ form, isEdit }: StepProps) {
     gender,
     lgaOfOrigin,
     lgaOfResidence,
-    stateOfOrigin,
     maritalStatus,
   } = watch();
 
@@ -142,16 +141,38 @@ export function BioStep({ form, isEdit }: StepProps) {
           )}
         </div>
       </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="middleName" className="text-[#060622] font-medium">
-          Middle Name
-        </Label>
-        <Input
-          id="middleName"
-          {...register('middleName')}
-          className="border-gray-300 focus:border-[#060622] focus:ring-[#060622]"
-        />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="middleName" className="text-[#060622] font-medium">
+            Middle Name
+          </Label>
+          <Input
+            id="middleName"
+            {...register('middleName')}
+            className="border-gray-300 focus:border-[#060622] focus:ring-[#060622]"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="email" className="text-[#060622] font-medium">
+            Email Address *
+          </Label>
+          <Input
+            id="email"
+            type="email"
+            disabled
+            {...register('email', {
+              required: 'Email is required',
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: 'Invalid email address',
+              },
+            })}
+            className="border-gray-300 focus:border-[#060622] focus:ring-[#060622]"
+          />
+          {errors.email && (
+            <p className="text-red-500 text-sm">{errors.email.message}</p>
+          )}
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -241,59 +262,6 @@ export function BioStep({ form, isEdit }: StepProps) {
           {errors.maritalStatus && (
             <p className="text-red-500 text-sm">
               {errors.maritalStatus.message}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <Label htmlFor="email" className="text-[#060622] font-medium">
-            Email Address *
-          </Label>
-          <Input
-            id="email"
-            type="email"
-            disabled
-            {...register('email', {
-              required: 'Email is required',
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: 'Invalid email address',
-              },
-            })}
-            className="border-gray-300 focus:border-[#060622] focus:ring-[#060622]"
-          />
-          {errors.email && (
-            <p className="text-red-500 text-sm">{errors.email.message}</p>
-          )}
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="stateOfOrigin" className="text-[#060622] font-medium">
-            State of Origin *
-          </Label>
-          <Select
-            {...register('stateOfOrigin', {
-              required: 'State of origin is required',
-            })}
-            value={stateOfOrigin}
-            onValueChange={(value) => setValue('stateOfOrigin', value)}
-          >
-            <SelectTrigger className="border-gray-300 focus:border-[#060622]">
-              <SelectValue placeholder="Select state" />
-            </SelectTrigger>
-            <SelectContent>
-              {NIGERIAN_STATES.map((state) => (
-                <SelectItem key={state} value={state}>
-                  {state}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          {errors.stateOfOrigin && (
-            <p className="text-red-500 text-sm">
-              {errors.stateOfOrigin.message}
             </p>
           )}
         </div>

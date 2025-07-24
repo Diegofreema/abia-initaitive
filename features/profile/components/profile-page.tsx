@@ -48,7 +48,7 @@ export function ProfilePage() {
               </p>
             </CardContent>
             <CardFooter className="flex justify-center">
-              <Button onClick={() => router.push('/user/registration')}>
+              <Button onClick={() => router.push('/user/register')}>
                 Start Registration
               </Button>
             </CardFooter>
@@ -209,7 +209,7 @@ export function ProfilePage() {
                 <p className="text-sm font-medium text-gray-500">
                   State of Origin
                 </p>
-                <p className="text-gray-900">{registration.stateOfOrigin}</p>
+                <p className="text-gray-900">{'Abia'}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-4">

@@ -15,7 +15,7 @@ export const personalInfoSchema = z.object({
   dateOfBirth: z.string().min(1, 'Date of birth is required'),
   maritalStatus: z.string().min(1, 'Marital status is required'),
   emailAddress: z.email().min(1, 'Email address is required'),
-  stateOfOrigin: z.string().min(1, 'State of origin is required'),
+
   lgaOfOrigin: z.string().min(1, 'LGA of origin is required'),
   town: z.string().min(1, 'Town is required'),
   lgaOfResidence: z.string().min(1, 'LGA of residence is required'),

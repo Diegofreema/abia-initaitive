@@ -27,7 +27,6 @@ const schema = defineSchema({
     dateOfBirth: v.string(),
     maritalStatus: v.string(),
     emailAddress: v.string(),
-    stateOfOrigin: v.string(),
     lgaOfOrigin: v.string(),
     town: v.string(),
     lgaOfResidence: v.string(),
