@@ -90,7 +90,7 @@ export function Navbar() {
                         Sign In
                       </Button>
                     </Link>
-                    <Link href="/register">
+                    <Link href="/user/register">
                       <Button
                         size="sm"
                         className="bg-green-600 hover:bg-green-700"
@@ -153,7 +153,7 @@ export function Navbar() {
                 <div className="pt-4 border-t">
                   {user ? (
                     <div className="space-y-2">
-                      <Link href="/profile" className="block">
+                      <Link href="/user/profile" className="block">
                         <Button
                           variant="outline"
                           size="sm"
@@ -193,7 +193,7 @@ export function Navbar() {
                           Sign In
                         </Button>
                       </Link>
-                      <Link href="/register" className="block">
+                      <Link href="/user/register" className="block">
                         <Button
                           size="sm"
                           className="w-full bg-green-600 hover:bg-green-700"

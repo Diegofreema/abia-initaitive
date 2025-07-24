@@ -26,6 +26,7 @@ import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { LoadingSkeleton } from '@/features/shared/components/loading-skeleton';
+import { cn } from '@/lib/utils';
 
 export function ProfilePage() {
   const registration = useQuery(api.registrations.getCurrentUserRegistration);
@@ -88,7 +89,7 @@ export function ProfilePage() {
         {/* Status Card */}
         <Card className="mb-8">
           <CardContent className="pt-6">
-            <div className="flex items-center justify-between">
+            <div className="flex sm:items-center justify-between gap-y-2 flex-col sm:flex-row">
               <div className="flex items-center space-x-4">
                 <Avatar className="h-16 w-16">
                   <AvatarImage
@@ -106,7 +107,9 @@ export function ProfilePage() {
                   <p className="text-gray-600">{registration.emailAddress}</p>
                 </div>
               </div>
-              <Badge className={getStatusColor(registration.status)}>
+              <Badge
+                className={cn('w-fit', getStatusColor(registration.status))}
+              >
                 {registration.status.charAt(0).toUpperCase() +
                   registration.status.slice(1)}
               </Badge>
