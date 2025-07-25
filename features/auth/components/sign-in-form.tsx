@@ -87,7 +87,7 @@ export function SignInForm() {
         })
         .catch((error) => {
           console.log(error.message);
-          if (error.message.includes('InvalidAccountId')) {
+          if (flow === 'signIn') {
             toast.error('Error', {
               description: 'Invalid email or password',
             });
