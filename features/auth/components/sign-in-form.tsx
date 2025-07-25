@@ -81,9 +81,9 @@ export function SignInForm() {
         .then(() => {
           setSubmitting(true);
           setFlow({ email: formData.get('email') as string });
-          toast.success('Success', {
-            description: 'A verification code has been sent to your email',
-          });
+          // toast.success('Success', {
+          //   description: 'A verification code has been sent to your email',
+          // });
         })
         .catch((error) => {
           console.log(error.message);
