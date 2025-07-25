@@ -1,18 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
-import { gsap } from 'gsap';
-import { useAuthActions } from '@convex-dev/auth/react';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useCurrentUser } from '@/features/auth/hooks/use-current-user';
+import { useAuthActions } from '@convex-dev/auth/react';
+import { Authenticated, AuthLoading, Unauthenticated } from 'convex/react';
+import { gsap } from 'gsap';
+import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { signOut } = useAuthActions();
   const user = useCurrentUser();
-  const isLoading = user === undefined;
+
   useEffect(() => {
     gsap.fromTo(
       '.navbar',
@@ -63,45 +65,65 @@ export function Navbar() {
               Contact
             </Link>
 
-            {!isLoading && (
-              <>
-                {user ? (
-                  <div className="flex items-center space-x-4">
-                    <Link href="/user/profile">
-                      <Button variant="outline" size="sm">
-                        Profile
-                      </Button>
-                    </Link>
-                    {user.isAdmin && (
-                      <Link href="/admin">
-                        <Button variant="outline" size="sm">
-                          Admin
-                        </Button>
-                      </Link>
-                    )}
-                    <Button onClick={handleSignOut} variant="outline" size="sm">
-                      Sign Out
+            <AuthLoading>
+              <div className="flex space-x-2">
+                <Skeleton className="h-5 w-[60px] rounded-full" />
+                <Skeleton className="h-5 w-[60px] rounded-full" />
+              </div>
+            </AuthLoading>
+            <Authenticated>
+              <div className="space-x-2 flex">
+                <Link href="/user/profile" className="block">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full bg-transparent"
+                  >
+                    Profile
+                  </Button>
+                </Link>
+                {user && user?.isAdmin && (
+                  <Link href="/admin/dashboard" className="block">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full bg-transparent"
+                    >
+                      Admin
                     </Button>
-                  </div>
-                ) : (
-                  <div className="flex items-center space-x-4">
-                    <Link href="/auth/signin">
-                      <Button variant="outline" size="sm">
-                        Sign In
-                      </Button>
-                    </Link>
-                    <Link href="/user/register">
-                      <Button
-                        size="sm"
-                        className="bg-green-600 hover:bg-green-700"
-                      >
-                        Register
-                      </Button>
-                    </Link>
-                  </div>
+                  </Link>
                 )}
-              </>
-            )}
+                <Button
+                  onClick={handleSignOut}
+                  variant="outline"
+                  size="sm"
+                  className="w-full bg-transparent"
+                >
+                  Sign Out
+                </Button>
+              </div>
+            </Authenticated>
+            <Unauthenticated>
+              <div className="space-x-2 flex">
+                <Link href="/auth/signin" className="block">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full bg-transparent"
+                  >
+                    Sign In
+                  </Button>
+                </Link>
+                <Link href="/user/register" className="block">
+                  <Button
+                    size="sm"
+                    className="w-full bg-green-600 hover:bg-green-700"
+                  >
+                    Register
+                  </Button>
+                </Link>
+              </div>
+            </Unauthenticated>
           </div>
 
           {/* Mobile menu button */}
@@ -149,62 +171,67 @@ export function Navbar() {
                 Contact
               </Link>
 
-              {!isLoading && (
-                <div className="pt-4 border-t">
-                  {user ? (
-                    <div className="space-y-2">
-                      <Link href="/user/profile" className="block">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="w-full bg-transparent"
-                        >
-                          Profile
-                        </Button>
-                      </Link>
-                      {user.isAdmin && (
-                        <Link href="/admin" className="block">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full bg-transparent"
-                          >
-                            Admin
-                          </Button>
-                        </Link>
-                      )}
+              <div className="pt-4 border-t">
+                <AuthLoading>
+                  <div className="flex space-x-2">
+                    <Skeleton className="h-5 w-[60px] rounded-full" />
+                    <Skeleton className="h-5 w-[60px] rounded-full" />
+                  </div>
+                </AuthLoading>
+                <Authenticated>
+                  <div className="space-y-2">
+                    <Link href="/user/profile" className="block">
                       <Button
-                        onClick={handleSignOut}
                         variant="outline"
                         size="sm"
                         className="w-full bg-transparent"
                       >
-                        Sign Out
+                        Profile
                       </Button>
-                    </div>
-                  ) : (
-                    <div className="space-y-2">
-                      <Link href="/auth/signin" className="block">
+                    </Link>
+                    {user && user?.isAdmin && (
+                      <Link href="/admin" className="block">
                         <Button
                           variant="outline"
                           size="sm"
                           className="w-full bg-transparent"
                         >
-                          Sign In
+                          Admin
                         </Button>
                       </Link>
-                      <Link href="/user/register" className="block">
-                        <Button
-                          size="sm"
-                          className="w-full bg-green-600 hover:bg-green-700"
-                        >
-                          Register
-                        </Button>
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              )}
+                    )}
+                    <Button
+                      onClick={handleSignOut}
+                      variant="outline"
+                      size="sm"
+                      className="w-full bg-transparent"
+                    >
+                      Sign Out
+                    </Button>
+                  </div>
+                </Authenticated>
+                <Unauthenticated>
+                  <div className="space-y-2">
+                    <Link href="/auth/signin" className="block">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="w-full bg-transparent"
+                      >
+                        Sign In
+                      </Button>
+                    </Link>
+                    <Link href="/user/register" className="block">
+                      <Button
+                        size="sm"
+                        className="w-full bg-green-600 hover:bg-green-700"
+                      >
+                        Register
+                      </Button>
+                    </Link>
+                  </div>
+                </Unauthenticated>
+              </div>
             </div>
           </div>
         )}

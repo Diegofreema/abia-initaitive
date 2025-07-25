@@ -1,10 +1,24 @@
 import { components } from './_generated/api';
-import { Resend } from '@convex-dev/resend';
+import { Resend, vEmailEvent, vEmailId } from '@convex-dev/resend';
 import { internalMutation } from './_generated/server';
 import { v } from 'convex/values';
 
-export const resend: Resend = new Resend(components.resend, {});
+export const resend: Resend = new Resend(components.resend, {
+  testMode: false,
+  webhookSecret: process.env.RESEND_WEBHOOK_SECRET ?? '',
+  apiKey: process.env.RESEND_API_KEY ?? '',
+});
 
+export const handleEmailEvent = internalMutation({
+  args: {
+    id: vEmailId,
+    event: vEmailEvent,
+  },
+  handler: async (ctx, args) => {
+    console.log('Got called back!', args.id, args.event);
+    // Probably do something with the event if you care about deliverability!
+  },
+});
 export const sendWelcomeEmail = internalMutation({
   args: { email: v.string(), name: v.string() },
   handler: async (ctx, args) => {

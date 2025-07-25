@@ -46,7 +46,7 @@ export function IdStep({ form, isEdit }: StepProps) {
 
         <div className="space-y-2">
           <Label htmlFor="absin" className="text-[#060622] font-medium">
-            Abia State Identification Number (ABSSIN) *
+            Abia State Identification Number (ABSSIN)
           </Label>
           <Input
             id="absin"

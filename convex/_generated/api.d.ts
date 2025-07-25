@@ -8,8 +8,11 @@
  * @module
  */
 
+import type * as ResendOTP from "../ResendOTP.js";
+import type * as ResendOtPPasswordReset from "../ResendOtPPasswordReset.js";
 import type * as auth from "../auth.js";
 import type * as counter from "../counter.js";
+import type * as errors from "../errors.js";
 import type * as http from "../http.js";
 import type * as registrations from "../registrations.js";
 import type * as sendEmails from "../sendEmails.js";
@@ -30,8 +33,11 @@ import type {
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  ResendOTP: typeof ResendOTP;
+  ResendOtPPasswordReset: typeof ResendOtPPasswordReset;
   auth: typeof auth;
   counter: typeof counter;
+  errors: typeof errors;
   http: typeof http;
   registrations: typeof registrations;
   sendEmails: typeof sendEmails;

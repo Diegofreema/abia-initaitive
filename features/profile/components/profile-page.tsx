@@ -1,7 +1,8 @@
 'use client';
 
-import { useQuery } from 'convex/react';
-import { api } from '@/convex/_generated/api';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
@@ -9,30 +10,37 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { api } from '@/convex/_generated/api';
+import { LoadingSpinner } from '@/features/shared/components/loading-spinner';
+import { cn } from '@/lib/utils';
+import { useAuthActions } from '@convex-dev/auth/react';
+import { useQuery } from 'convex/react';
+import { format } from 'date-fns';
 import {
   CalendarDays,
-  Mail,
-  Phone,
-  MapPin,
-  User,
   FileText,
   Heart,
+  Mail,
+  MapPin,
+  Phone,
+  User,
   Users,
 } from 'lucide-react';
-import { format } from 'date-fns';
-import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { LoadingSkeleton } from '@/features/shared/components/loading-skeleton';
-import { cn } from '@/lib/utils';
 
 export function ProfilePage() {
   const registration = useQuery(api.registrations.getCurrentUserRegistration);
   const router = useRouter();
+  const { signOut } = useAuthActions();
   if (registration === undefined) {
-    return <LoadingSkeleton />;
+    return (
+      <div className="min-h-screen bg-gray-50 py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
   }
   if (!registration) {
     return (
@@ -403,6 +411,24 @@ export function ProfilePage() {
               )}
             </div>
           </CardContent>
+          <CardFooter className="w-full flex justify-center">
+            <div className="flex justify-center space-x-4">
+              <Button
+                variant={'default'}
+                className="w-[200px]"
+                onClick={() => router.push('/')}
+              >
+                Home
+              </Button>
+              <Button
+                variant={'destructive'}
+                className="w-[200px]"
+                onClick={() => signOut()}
+              >
+                Log out
+              </Button>
+            </div>
+          </CardFooter>
         </Card>
       </div>
     </div>

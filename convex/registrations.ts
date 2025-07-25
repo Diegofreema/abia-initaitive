@@ -4,7 +4,8 @@ import { getAuthUserId } from '@convex-dev/auth/server';
 import { paginationOptsValidator } from 'convex/server';
 import { v } from 'convex/values';
 // import { internal } from './_generated/api';
-import { totalRegistrations } from './counter';
+import { increaseCounterV2, LGAName, totalRegistrations } from './counter';
+import { internal } from './_generated/api';
 
 export const create = mutation({
   args: {
@@ -120,10 +121,11 @@ export const create = mutation({
       isRegistered: true,
     });
     await totalRegistrations.inc(ctx);
-    // await ctx.scheduler.runAfter(0, internal.sendEmails.sendWelcomeEmail, {
-    //   email: args.personalInfo.emailAddress,
-    //   name: `${args.personalInfo.firstName} ${args.personalInfo.lastName}`,
-    // });
+    await increaseCounterV2(args.personalInfo.lgaOfOrigin as LGAName, ctx);
+    await ctx.scheduler.runAfter(0, internal.sendEmails.sendWelcomeEmail, {
+      email: args.personalInfo.emailAddress,
+      name: `${args.personalInfo.firstName} ${args.personalInfo.lastName}`,
+    });
 
     return registrationId;
   },

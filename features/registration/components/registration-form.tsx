@@ -3,7 +3,7 @@
 import { api } from '@/convex/_generated/api';
 import { LoadingSpinner } from '@/features/shared/components/loading-spinner';
 import { useQuery } from 'convex/react';
-import { notFound, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { RegistrationComponent } from './registration-component';
 
@@ -12,7 +12,12 @@ export function RegistrationForm() {
 
   const router = useRouter();
   useEffect(() => {
-    if (user === undefined || user === null) {
+    if (user === undefined) {
+      return;
+    }
+
+    if (user === null) {
+      router.replace('/auth/signin');
       return;
     }
 
@@ -26,7 +31,7 @@ export function RegistrationForm() {
   }
 
   if (user === null) {
-    return notFound();
+    return null;
   }
 
   return (
