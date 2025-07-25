@@ -7,7 +7,12 @@ import {
 export function CodeInput({ length = 8 }: { length?: number }) {
   return (
     <div className="mb-4">
-      <InputOTP maxLength={8} name="code" className={'self-center  w-full'}>
+      <InputOTP
+        maxLength={8}
+        name="code"
+        id="code"
+        className={'self-center  w-full'}
+      >
         <InputOTPGroup
           className={'flex items-center self-center flex-1 w-full'}
         >

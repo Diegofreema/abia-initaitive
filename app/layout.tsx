@@ -3,7 +3,8 @@ import localFont from 'next/font/local';
 import { ConvexAuthNextjsServerProvider } from '@convex-dev/auth/nextjs/server';
 import './globals.css';
 import { ConvexClientProvider } from '@/features/provider/convec-client-provider';
-import { Toaster } from '@/components/ui/sonner';
+import { Toaster } from 'sonner';
+// import { Toaster } from '@/components/ui/sonner';
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',

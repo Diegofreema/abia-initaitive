@@ -30,7 +30,6 @@ export function SignInForm() {
   const user = useCurrentUser();
   const { isAuthenticated } = useConvexAuth();
   const router = useRouter();
-  const [isForgot, setIsForgot] = useState(false);
 
   const [flow, setFlow] = useState<'signIn' | 'signUp' | { email: string }>(
     'signIn'
@@ -91,11 +90,23 @@ export function SignInForm() {
           });
         })
         .catch((error) => {
+          console.log(error.message);
+          if (error.message.includes('InvalidAccountId')) {
+            toast.error('Error', {
+              description: 'Invalid email or password',
+            });
+            return;
+          }
           if (error instanceof ConvexError && error.data === INVALID_PASSWORD) {
             toast('Error', {
               description: 'Password too weak',
             });
+            return;
           }
+
+          toast.error('Error', {
+            description: 'Something went wrong, please try again',
+          });
         })
         .finally(() => {
           setSubmitting(false);
@@ -117,20 +128,21 @@ export function SignInForm() {
       //     setSubmitting(false);
       //   });
     } else {
-      const message = isForgot
-        ? 'Password reset successfully'
-        : 'Email verified, welcome onboard';
-      void signIn('password-custom')
+      void signIn('password-custom', formData)
         .then(() => {
           toast.success('Success', {
-            description: message,
+            description: 'Email verified, welcome onboard',
           });
           router.replace('/user/register');
           setFlow('signUp');
         })
+        .catch(() => {
+          toast.error('Error', {
+            description: 'Something went wrong, please try again',
+          });
+        })
         .finally(() => {
           setSubmitting(false);
-          setIsForgot(false);
         });
     }
 

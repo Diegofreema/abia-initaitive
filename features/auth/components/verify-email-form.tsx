@@ -17,6 +17,8 @@ export const VerifyEmailForm = ({
   email,
   onCancel,
 }: Props) => {
+  console.log({ email });
+
   return (
     <CardContent>
       <form onSubmit={onSubmit} className="space-y-4">
