@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
 import {
   IconBrandFacebook,
   IconBrandInstagram,
+  IconBrandLinkedinFilled,
   IconBrandTwitter,
 } from '@tabler/icons-react';
+import { Mail, Phone } from 'lucide-react';
+import Link from 'next/link';
 
 export function Footer() {
   return (
@@ -25,9 +26,18 @@ export function Footer() {
               opportunities.
             </p>
             <div className="flex space-x-4">
-              <IconBrandFacebook className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
-              <IconBrandTwitter className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
-              <IconBrandInstagram className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+              <Link href={'https://www.facebook.com/learnfactorynigeria'}>
+                <IconBrandFacebook className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+              </Link>
+              <Link href="https://x.com/LearnFactoryNG">
+                <IconBrandTwitter className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+              </Link>
+              <Link href={'https://www.instagram.com/learnfactorynig'}>
+                <IconBrandInstagram className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+              </Link>
+              <Link href="https://www.linkedin.com/company/learnfactory-nigeria/">
+                <IconBrandLinkedinFilled className="h-5 w-5 text-gray-400 hover:text-green-400 cursor-pointer transition-colors" />
+              </Link>
             </div>
           </div>
 
@@ -35,38 +45,38 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
+              {/* <li>
                 <Link
                   href="/about"
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   About Us
                 </Link>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <Link
                   href="/programs"
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Programs
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
-                  href="/register"
+                  href="/user/register"
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Register
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/contact"
                   className="text-gray-300 hover:text-green-400 transition-colors"
                 >
                   Contact
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -74,19 +84,25 @@ export function Footer() {
           <div>
             <h3 className="font-semibold text-lg mb-4">Contact Info</h3>
             <ul className="space-y-3">
-              <li className="flex items-center space-x-2">
+              {/* <li className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-green-400" />
                 <span className="text-gray-300 text-sm">
                   Umuahia, Abia State, Nigeria
                 </span>
+              </li> */}
+              <li className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-green-400" />
+                <span className="text-gray-300 text-sm">+234 8108960884</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone className="h-4 w-4 text-green-400" />
-                <span className="text-gray-300 text-sm">+234 XXX XXX XXXX</span>
+                <span className="text-gray-300 text-sm">+234 8033166567</span>
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="h-4 w-4 text-green-400" />
-                <span className="text-gray-300 text-sm">info@ayla.gov.ng</span>
+                <span className="text-gray-300 text-sm">
+                  info@learnfactory.com.ng
+                </span>
               </li>
             </ul>
           </div>

@@ -40,13 +40,13 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link
+            {/* <Link
               href="/"
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               Home
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               href="/about"
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
@@ -57,13 +57,13 @@ export function Navbar() {
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               Programs
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               href="/contact"
               className="text-gray-700 hover:text-green-600 transition-colors"
             >
               Contact
-            </Link>
+            </Link> */}
 
             <AuthLoading>
               <div className="flex space-x-2">
@@ -146,7 +146,7 @@ export function Navbar() {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              <Link
+              {/* <Link
                 href="/"
                 className="block px-3 py-2 text-gray-700 hover:text-green-600"
               >
@@ -163,13 +163,13 @@ export function Navbar() {
                 className="block px-3 py-2 text-gray-700 hover:text-green-600"
               >
                 Programs
-              </Link>
-              <Link
+              </Link> */}
+              {/* <Link
                 href="/contact"
                 className="block px-3 py-2 text-gray-700 hover:text-green-600"
               >
                 Contact
-              </Link>
+              </Link> */}
 
               <div className="pt-4 border-t">
                 <AuthLoading>

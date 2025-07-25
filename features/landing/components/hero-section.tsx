@@ -50,7 +50,7 @@ export function HeroSection() {
           {/* Text Content */}
           <div ref={textRef} className="text-white">
             <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              ABIA YOUTH
+              ABIA FIRST
               <span className="block text-green-200">LEADERSHIP</span>
               <span className="block">ACADEMY</span>
             </h1>
@@ -72,7 +72,7 @@ export function HeroSection() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </Link>
-              <Link href="/about">
+              {/* <Link href="/about">
                 <Button
                   size="lg"
                   variant="outline"
@@ -80,7 +80,7 @@ export function HeroSection() {
                 >
                   Learn More
                 </Button>
-              </Link>
+              </Link> */}
             </div>
 
             {/* Stats */}
