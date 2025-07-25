@@ -1,9 +1,7 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
@@ -11,8 +9,6 @@ import {
 import { INVALID_PASSWORD } from '@/convex/errors';
 import { useAuthActions } from '@convex-dev/auth/react';
 
-import { Separator } from '@/components/ui/separator';
-import { IconBrandGoogle } from '@tabler/icons-react';
 import { useConvexAuth } from 'convex/react';
 import { ConvexError } from 'convex/values';
 import { useRouter } from 'next/navigation';
@@ -164,11 +160,14 @@ export function SignInForm() {
         ? 'Sign Up'
         : 'Verify Email';
   const isSignInOrSigUp = flow === 'signIn' || flow === 'signUp';
-  const handleGoogleSignIn = async () => {
-    void signIn('google', {
-      redirectTo: '/user/profile',
-    });
-  };
+  // const handleGoogleSignIn = async () => {
+  //   setSubmitting(true);
+  //   void signIn('google', {
+  //     redirectTo: '/user/profile',
+  //   }).finally(() => {
+  //     setSubmitting(false);
+  //   });
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -202,7 +201,7 @@ export function SignInForm() {
             onCancel={() => setFlow('signIn')}
           />
         )}
-        <CardContent className="">
+        {/* <CardContent className="">
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <Separator className="w-full" />
@@ -215,11 +214,12 @@ export function SignInForm() {
             onClick={handleGoogleSignIn}
             className="w-full mt-5"
             size="lg"
+            disabled={submitting}
           >
             <IconBrandGoogle className="mr-2 h-4 w-4" />
             {'Continue with Google'}
           </Button>
-        </CardContent>
+        </CardContent> */}
       </Card>
     </div>
   );

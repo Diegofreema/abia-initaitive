@@ -14,7 +14,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { signOut } = useAuthActions();
   const user = useCurrentUser();
-
+  const [siginingOut, setSiginingOut] = useState(false);
   useEffect(() => {
     gsap.fromTo(
       '.navbar',
@@ -23,8 +23,15 @@ export function Navbar() {
     );
   }, []);
 
-  const handleSignOut = () => {
-    signOut();
+  const handleSignOut = async () => {
+    setSiginingOut(true);
+    try {
+      await signOut();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSiginingOut(false);
+    }
   };
 
   return (
@@ -98,6 +105,7 @@ export function Navbar() {
                   variant="outline"
                   size="sm"
                   className="w-full bg-transparent"
+                  disabled={siginingOut}
                 >
                   Sign Out
                 </Button>
@@ -205,6 +213,7 @@ export function Navbar() {
                       variant="outline"
                       size="sm"
                       className="w-full bg-transparent"
+                      disabled={siginingOut}
                     >
                       Sign Out
                     </Button>
